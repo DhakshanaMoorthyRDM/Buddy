@@ -22,7 +22,6 @@ body {
   position: relative;
   width: 132px;
   height: 132px;
-  -webkit-app-region: drag;
 }
 .character-scale {
   position: absolute;
