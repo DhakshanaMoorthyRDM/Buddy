@@ -4,6 +4,8 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 800,
+    transparent: true,
+    frame: false,
   })
 
   win.loadURL('http://localhost:5173')
