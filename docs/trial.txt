@@ -1,0 +1,1172 @@
+Absolutely. Before we continue, let's re-establish the **whole Buddy project** so we don't lose the architecture or accidentally start adding random features.
+
+# 🧑‍💻 Buddy — Project Master Plan
+
+## 1. What is this project?
+
+**Buddy** is a personal Windows desktop AI companion.
+
+The idea is not just to make a chatbot with a character attached.
+
+The long-term goal is:
+
+> **A small autonomous desktop companion that lives on your Windows desktop, has a personality and visual presence, can see/hear/speak when permitted, remembers things, reacts to what is happening, and can interact with your computer through controlled tools.**
+
+Think of it as:
+
+```text
+        ┌─────────────────────────────┐
+        │          BUDDY              │
+        │                             │
+        │   🧠 AI / Personality       │
+        │   👀 Vision                 │
+        │   👂 Hearing                │
+        │   🗣️ Voice                  │
+        │   💾 Memory                 │
+        │   😊 Emotions               │
+        │   🛠️ Tools                  │
+        │   🔐 Permissions            │
+        │   🖥️ Windows interaction    │
+        │                             │
+        │        [ Chibi ]            │
+        └─────────────────────────────┘
+```
+
+But we're deliberately building it **from the bottom upward**, rather than trying to make everything at once.
+
+---
+
+# 2. The character
+
+Buddy's current character is an original hooded chibi character.
+
+### Visual identity
+
+* Dark charcoal/black oversized hood
+* Face hidden beneath the hood
+* Glowing expressive eyes
+* Crimson/red accents
+* Glowing crimson chest core
+* Black boots
+* Mysterious/supernatural appearance
+* Cute, but **not childish**
+* No weapons
+* No armor
+* No wings
+* No horns
+* No unnecessary accessories
+* **NO MOUTH**
+
+### Personality
+
+The eventual personality direction is:
+
+* Friendly
+* Mischievous
+* Slightly sarcastic
+* Curious
+* Intelligent
+* Sometimes lazy
+* Loyal
+* Cute without behaving like a children's mascot
+
+The character should eventually feel like a **companion**, rather than an animated wallpaper.
+
+---
+
+# 3. Why we're using layers
+
+We deliberately avoided making every expression a completely different character image.
+
+Our structure is:
+
+```text
+BODY
+  +
+HEAD / HOOD
+  +
+EYES
+  +
+CHEST CORE
+```
+
+So we can independently change:
+
+```text
+Eyes
+├── Open
+├── Closed
+├── Half closed
+├── Looking left
+├── Looking right
+└── Future expressions
+
+Chest
+└── Glow / pulse
+
+Body
+└── Future poses / animations
+
+Head
+└── Remains stable
+```
+
+This is important because otherwise blinking would require swapping the entire character.
+
+---
+
+# 4. Current assets
+
+We already prepared the major initial assets.
+
+Current production structure:
+
+```text
+frontend/assets/character_prepared/
+
+├── body/
+│   └── body.png
+│
+├── head/
+│   ├── head.png
+│   ├── open.png
+│   ├── closed.png
+│   ├── half_closed.png
+│   ├── looking_left.png
+│   ├── looking_right.png
+│   └── ...
+│
+├── head/eyes/
+│   ├── opened_eye.png
+│   ├── closed_eye.png
+│   └── ...
+│
+└── chest_core/
+    └── chest_core_glow.png
+```
+
+We've also inspected the actual alpha bounds with Python/Pillow.
+
+We decided **not to destructively crop the production assets**.
+
+That's important because the asset dimensions and alignment are part of the character system.
+
+---
+
+# 5. Current technology
+
+The current visual application is:
+
+```text
+TypeScript
+      ↓
+HTML / CSS
+      ↓
+Vite
+      ↓
+Electron
+      ↓
+Windows
+```
+
+Current versions we've been working with:
+
+```text
+Node.js    24.19.0
+npm        11.17.0
+Electron   44.5.1
+Vite       8.3.1
+TypeScript 6.x
+Python     3.13.15
+Pillow     12.3.0
+```
+
+Python isn't the main UI technology.
+
+We'll use it later for things where Python is actually useful, such as AI/vision/audio/backend work.
+
+---
+
+# 6. Current project structure
+
+Our root is:
+
+```text
+C:\Users\dhaks\Music\chibi-companion
+```
+
+Currently:
+
+```text
+chibi-companion/
+│
+├── docs/
+│
+├── electron/
+│   ├── main.cjs
+│   └── preload.cjs
+│
+├── frontend/
+│   ├── assets/
+│   ├── public/
+│   └── src/
+│       ├── character/
+│       │   ├── character-layers.ts
+│       │   └── character-renderer.ts
+│       │
+│       ├── main.ts
+│       ├── style.css
+│       └── buddy-desktop.d.ts
+│
+└── scripts/
+```
+
+Eventually this will grow into a much more structured application.
+
+---
+
+# 7. What we've completed
+
+This is the important part.
+
+## Phase 0 — Planning
+
+Completed.
+
+We decided:
+
+* Windows desktop companion
+* Electron instead of JavaFX
+* TypeScript frontend
+* Node/Electron desktop layer
+* Python later where useful
+* SQLite later
+* AI provider abstraction
+* permission system
+* controlled computer tools
+* no arbitrary AI shell access
+
+---
+
+# 8. Character renderer
+
+Completed.
+
+We created a reusable `CharacterRenderer`.
+
+Current visual layers:
+
+```text
+character
+│
+├── body
+├── head
+├── open eyes
+├── closed eyes
+└── chest glow
+```
+
+The renderer currently handles:
+
+### Breathing
+
+Buddy gently moves/scales:
+
+```text
+normal
+  ↓
+slightly compressed
+  ↓
+normal
+  ↓
+repeat
+```
+
+### Chest pulse
+
+The chest core continuously pulses.
+
+### Blinking
+
+We implemented automatic random blinking.
+
+So Buddy isn't just a static PNG anymore.
+
+He's already a small animated character.
+
+---
+
+# 9. Scaling problem — solved
+
+We had a problem where the breathing animation and character scaling both wanted to use CSS `transform`.
+
+We fixed that by introducing:
+
+```text
+character-stage
+      ↓
+character-scale
+      ↓
+character
+```
+
+Current conceptual structure:
+
+```text
+132 × 132
+character-stage
+      │
+      └── 627 × 627
+          character-scale
+              │
+              └── character
+                  ├── body
+                  ├── head
+                  ├── eyes
+                  └── chest
+```
+
+`character-scale` handles the permanent scale.
+
+`character` handles animation.
+
+This prevented the breathing animation from overriding the character scale.
+
+---
+
+# 10. Electron desktop window
+
+Completed.
+
+Buddy is now actually a Windows desktop application window.
+
+Current:
+
+```text
+Electron BrowserWindow
+```
+
+with:
+
+```text
+transparent: true
+frame: false
+resizable: false
+alwaysOnTop: true
+```
+
+Current size:
+
+```text
+132 × 132
+```
+
+Position:
+
+```text
+top-right
+20px margin
+```
+
+So Buddy is no longer just a browser page.
+
+He's actually sitting on the Windows desktop.
+
+---
+
+# 11. Dragging
+
+This was the most recent major milestone.
+
+Initially we used:
+
+```text
+CSS -webkit-app-region: drag
+```
+
+But that made the **entire 132×132 rectangle draggable**.
+
+That wasn't acceptable.
+
+We wanted:
+
+```text
+       132×132
+┌─────────────────┐
+│ transparent     │
+│       🧑        │ ← draggable
+│ transparent     │
+└─────────────────┘
+```
+
+So we built a pixel-based hit-test.
+
+---
+
+# 12. Pixel hit testing
+
+We created a hidden:
+
+```text
+627 × 627 canvas
+```
+
+and drew:
+
+```text
+BODY
++
+transformed HEAD
+```
+
+onto it.
+
+Then we inspect:
+
+```ts
+hitContext.getImageData(x, y, 1, 1).data[3]
+```
+
+The final channel is alpha.
+
+Therefore:
+
+```text
+alpha === 0
+    ↓
+transparent
+
+alpha > 0
+    ↓
+Buddy exists here
+```
+
+This lets us determine whether the mouse is actually over Buddy's visible pixels.
+
+---
+
+# 13. Native click-through
+
+This was the tricky part.
+
+The requirement was:
+
+> If I click transparent space around Buddy, Windows should receive the click instead of Buddy.
+
+We discovered that normal browser hit testing isn't enough.
+
+So we integrated Electron:
+
+```js
+win.setIgnoreMouseEvents(...)
+```
+
+with:
+
+```js
+forward: true
+```
+
+and global cursor tracking.
+
+The current architecture is:
+
+```text
+Windows cursor
+       ↓
+Electron
+       ↓
+global cursor coordinates
+       ↓
+renderer
+       ↓
+627×627 alpha mask
+       ↓
+is Buddy visible here?
+       │
+       ├── NO
+       │    ↓
+       │  Electron ignores mouse
+       │    ↓
+       │  application underneath receives click
+       │
+       └── YES
+            ↓
+          Electron interactive
+            ↓
+          Buddy receives input
+```
+
+This is now **working**.
+
+---
+
+# 14. Fast dragging
+
+We also found another problem.
+
+Normal dragging worked, but if you dragged Buddy extremely quickly:
+
+```text
+mouse
+  ↓
+leaves 132×132 window
+  ↓
+renderer stops receiving mousemove
+  ↓
+Buddy stops following
+```
+
+We fixed that by moving the actual drag movement into Electron.
+
+Electron now tracks the **global Windows cursor**.
+
+Conceptually:
+
+```text
+Mouse down on Buddy
+        ↓
+Electron starts dragging
+        ↓
+global cursor tracking
+        ↓
+cursor delta
+        ↓
+move BrowserWindow
+```
+
+Therefore the cursor can leave Buddy's window and Buddy still follows.
+
+You tested this with fast dragging and confirmed:
+
+> **It's working fine.**
+
+That is our latest completed technical milestone.
+
+---
+
+# 15. Where we are RIGHT NOW
+
+Our current Buddy is essentially:
+
+```text
+                    WINDOWS DESKTOP
+
+┌──────────────────────────────────────────┐
+│                              ┌─────────┐ │
+│                              │  Buddy  │ │
+│                              │         │ │
+│                              │ 👁  👁  │ │
+│                              │   🔴    │ │
+│                              └─────────┘ │
+│                                          │
+│      Other Windows / Desktop             │
+│                                          │
+└──────────────────────────────────────────┘
+```
+
+And Buddy can:
+
+* appear transparently
+* stay on top
+* remain frameless
+* remain fixed-size
+* breathe
+* blink
+* pulse his chest
+* detect his visible pixels
+* allow background clicks through transparent regions
+* be dragged from his visible area
+* follow fast mouse movements
+* avoid Windows resize behavior
+
+That's a **real foundation**, not a mockup anymore.
+
+---
+
+# 16. Current Git milestone
+
+We are on:
+
+```text
+feature/electron-desktop
+```
+
+Repository:
+
+```text
+Buddy
+```
+
+GitHub:
+
+`DhakshanaMoorthyRDM/Buddy`
+
+We are committing the Electron interaction milestone now.
+
+The intended commit:
+
+```text
+feat: add pixel click-through and smooth desktop dragging
+```
+
+So this becomes our stable checkpoint.
+
+---
+
+# 17. What comes next
+
+Now we start turning the animated character into an actual **companion**.
+
+I would divide the remaining project into these phases.
+
+---
+
+## PHASE 1 — Character behavior
+
+### 1. Eye states
+
+Already have the assets.
+
+Next:
+
+```text
+OPEN
+CLOSED
+HALF CLOSED
+LOOK LEFT
+LOOK RIGHT
+```
+
+Then Buddy can randomly look around.
+
+For example:
+
+```text
+IDLE
+ ↓
+look left
+ ↓
+normal
+ ↓
+look right
+ ↓
+blink
+ ↓
+normal
+```
+
+We specifically decided **not to implement left/right eyes separately yet** until the foundation was stable.
+
+---
+
+### 2. Character state system
+
+Instead of scattering animation logic everywhere, introduce a state model.
+
+Something like:
+
+```text
+IDLE
+THINKING
+TALKING
+LISTENING
+HAPPY
+CONFUSED
+SURPRISED
+ANNOYED
+SLEEPING
+EXCITED
+ERROR
+RECORDING
+SCREENSHOT
+```
+
+The renderer will eventually react to these states.
+
+Example:
+
+```text
+state = THINKING
+
+→ eyes change
+→ chest behavior changes
+→ body animation changes
+```
+
+This becomes extremely important later when AI enters the project.
+
+---
+
+# PHASE 2 — Interaction
+
+After the character states:
+
+### Click interaction
+
+For example:
+
+```text
+click Buddy
+    ↓
+Buddy reacts
+```
+
+Potentially:
+
+```text
+"Hey."
+
+or
+
+eye movement
+chest pulse
+small animation
+```
+
+No need to build a huge UI yet.
+
+---
+
+### Right click / context menu
+
+Eventually:
+
+```text
+Buddy
+ └── Right click
+      ├── Talk
+      ├── Settings
+      ├── Pause
+      ├── Memory
+      └── Exit
+```
+
+But we don't need to implement this immediately.
+
+---
+
+# PHASE 3 — Desktop application structure
+
+Then we make Buddy feel like a proper application.
+
+Things like:
+
+```text
+Buddy.exe
+```
+
+instead of:
+
+```text
+npm run electron
+```
+
+Eventually:
+
+* application icon
+* startup behavior
+* system tray
+* settings
+* close/minimize behavior
+* configuration
+* packaged installer
+
+The goal is:
+
+> **Double-click Buddy.exe → Buddy comes alive.**
+
+No terminal required.
+
+---
+
+# PHASE 4 — Backend architecture
+
+Then we introduce the actual application backend.
+
+Something like:
+
+```text
+Angular/TypeScript
+        ↓
+Electron
+        ↓
+Node.js
+        ↓
+Python services
+```
+
+But we don't want Python controlling everything.
+
+The architecture should remain modular.
+
+---
+
+# PHASE 5 — Memory
+
+Introduce SQLite.
+
+Potential data:
+
+```text
+users/preferences
+memories
+conversations
+events
+settings
+```
+
+For example:
+
+```text
+memory
+-------------------------
+id
+type
+content
+importance
+created_at
+updated_at
+```
+
+Eventually Buddy could remember things you've explicitly allowed him to remember.
+
+---
+
+# PHASE 6 — AI
+
+Then introduce:
+
+```text
+AIService
+```
+
+rather than hardcoding one AI provider.
+
+Conceptually:
+
+```text
+AIService
+   │
+   ├── OpenAI provider
+   ├── Local model provider
+   └── Future provider
+```
+
+That means Buddy isn't architecturally trapped to one AI system.
+
+---
+
+# PHASE 7 — Voice
+
+Eventually:
+
+```text
+Microphone
+    ↓
+STT
+    ↓
+Buddy
+    ↓
+AI
+    ↓
+TTS
+    ↓
+Speaker
+```
+
+Buddy can then actually have conversations.
+
+His visual state could synchronize:
+
+```text
+LISTENING
+    ↓
+THINKING
+    ↓
+TALKING
+```
+
+---
+
+# PHASE 8 — Vision
+
+Eventually Buddy can see your screen **only with permission**.
+
+Potential flow:
+
+```text
+Screenshot
+    ↓
+Vision model
+    ↓
+AI understands screen
+```
+
+Then:
+
+> "What am I looking at?"
+
+could actually mean something.
+
+---
+
+# PHASE 9 — Tools
+
+This is one of the most important parts of the entire architecture.
+
+Buddy should **not** have unrestricted computer access.
+
+Instead:
+
+```text
+AI
+ ↓
+Tool Request
+ ↓
+PermissionManager
+ ↓
+ALLOW / DENY / ASK / CONFIRM
+ ↓
+Tool
+ ↓
+Windows
+```
+
+Possible tools:
+
+```text
+Screenshot
+Screen recording
+Clipboard
+Filesystem
+Browser
+Keyboard
+Mouse
+Applications
+```
+
+For example:
+
+```text
+AI:
+"Take a screenshot."
+
+       ↓
+
+ToolPlanner
+
+       ↓
+
+PermissionManager
+
+       ↓
+
+User permission
+
+       ↓
+
+ScreenshotTool
+
+       ↓
+
+Windows
+```
+
+The AI never gets arbitrary:
+
+```text
+cmd.exe
+PowerShell
+shell
+```
+
+access.
+
+That separation is a major security principle of Buddy.
+
+---
+
+# PHASE 10 — Autonomy
+
+Only much later.
+
+Buddy could eventually have controlled autonomous behavior:
+
+```text
+time-based events
+idle events
+screen events
+system events
+conversation events
+```
+
+For example:
+
+```text
+User hasn't interacted for a while
+          ↓
+Buddy becomes sleepy
+```
+
+or:
+
+```text
+Buddy notices something interesting
+          ↓
+Buddy reacts
+```
+
+But autonomy will always go through permissions and explicit boundaries.
+
+---
+
+# PHASE 11 — Final Buddy
+
+The eventual architecture looks roughly like:
+
+```text
+                         BUDDY
+                           │
+            ┌──────────────┴──────────────┐
+            │                             │
+       Presentation                   Application
+            │                             │
+      Character UI                    State Manager
+      Animation                       Event System
+      Interaction                     Scheduler
+            │                             │
+            └──────────────┬──────────────┘
+                           │
+                       AI SYSTEM
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+              AIService          Vision
+                  │                 │
+              Memory              Voice
+                  │                 │
+                  └────────┬────────┘
+                           │
+                    PermissionManager
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                  Tools         Settings
+                    │
+        ┌───────────┼──────────────┐
+        │           │              │
+    Screenshot   Browser      Keyboard/Mouse
+        │           │              │
+        └───────────┴──────────────┘
+                    │
+                  Windows
+```
+
+---
+
+# 18. Our development philosophy
+
+This is important because it's easy for a project like this to become a giant mess.
+
+We're **not** going to do:
+
+```text
+AI
+voice
+vision
+database
+screen control
+animations
+UI
+permissions
+everything
+```
+
+all at once.
+
+We're building vertically:
+
+```text
+Character
+   ↓
+Character behavior
+   ↓
+Interaction
+   ↓
+Desktop application
+   ↓
+Backend
+   ↓
+Memory
+   ↓
+Voice
+   ↓
+AI
+   ↓
+Vision
+   ↓
+Tools
+   ↓
+Autonomy
+```
+
+Each major layer should work before we add the next.
+
+---
+
+# 19. The immediate roadmap
+
+So after today's Git commit:
+
+### ✅ Completed
+
+```text
+[✓] Project architecture planning
+[✓] Character design
+[✓] Character asset preparation
+[✓] Layered character system
+[✓] Character renderer
+[✓] Breathing
+[✓] Chest pulse
+[✓] Blinking
+[✓] Electron
+[✓] Transparent window
+[✓] Frameless window
+[✓] Always-on-top
+[✓] Fixed 132×132 window
+[✓] Non-resizable
+[✓] Pixel hit testing
+[✓] Click-through transparent areas
+[✓] Visible-area dragging
+[✓] Fast dragging
+[✓] Git milestone
+```
+
+### 🔜 Next
+
+```text
+[ ] Clean/verify eye assets
+[ ] Half-closed eyes
+[ ] Looking left/right
+[ ] Idle eye movement
+[ ] Character state system
+[ ] More natural idle behavior
+[ ] Click interaction
+[ ] Desktop app shell/settings
+[ ] Packaging → Buddy.exe
+[ ] Python backend
+[ ] SQLite memory
+[ ] AIService
+[ ] Voice
+[ ] Vision
+[ ] PermissionManager
+[ ] Computer tools
+[ ] Controlled autonomy
+```
+
+And **we don't need to jump to AI yet**.
+
+The next logical thing is to make the character itself feel more alive: **eye states + idle behavior + a proper character state system**.
+
+That gives us a solid visual/interaction foundation before we introduce the much more complicated AI/backend side.
