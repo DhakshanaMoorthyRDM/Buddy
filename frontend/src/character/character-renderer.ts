@@ -68,9 +68,9 @@ export class CharacterRenderer {
   private startChestPulse(): void {
     this.chest.animate(
       [
-        { opacity: 0.4 },
         { opacity: 1 },
-        { opacity: 0.4 },
+        { opacity: 0 },
+        { opacity: 1 },
       ],
       {
         duration: 3000,

@@ -1,9 +1,8 @@
 const { app, BrowserWindow, screen } = require('electron')
 
 function createWindow() {
-  const windowSize = 627
-  const margin = 5
-  const zoom = 0.25
+  const windowSize = 132
+  const margin = 20
 
   const win = new BrowserWindow({
     width: windowSize,
@@ -18,8 +17,7 @@ function createWindow() {
     workArea.x + workArea.width - windowSize - margin,
     workArea.y + margin,
   )
-
-  win.webContents.setZoomFactor(zoom)
+  win.setAlwaysOnTop(true)
 
   win.loadURL('http://localhost:5173')
 }
