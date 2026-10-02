@@ -70,3 +70,20 @@ body {
 .character-chest {
   z-index: 4;
 }
+
+.character-body-blue {
+  z-index: 1;
+}
+
+.character-head-blue {
+  z-index: 2;
+  transform: translate(1px, -141px) scale(0.69);
+  transform-origin: center center;
+}
+
+.character-eye-open-blue,
+.character-eye-closed-blue {
+  z-index: 3;
+  transform: translate(1px, -141px) scale(0.69);
+  transform-origin: center center;
+}

@@ -9,6 +9,10 @@ export class CharacterRenderer {
   private eyeOpen: HTMLImageElement
   private eyeClosed: HTMLImageElement
   private chest: HTMLImageElement
+  private bodyBlue: HTMLImageElement
+private headBlue: HTMLImageElement
+private eyeOpenBlue: HTMLImageElement
+private eyeClosedBlue: HTMLImageElement
 
   private state: CharacterState = 'awake'
 
@@ -28,23 +32,39 @@ export class CharacterRenderer {
     this.eyeOpen = this.createLayer('character-eye-open')
     this.eyeClosed = this.createLayer('character-eye-closed')
     this.chest = this.createLayer('character-chest')
+    this.bodyBlue = this.createLayer('character-body-blue')
+this.headBlue = this.createLayer('character-head-blue')
+this.eyeOpenBlue = this.createLayer('character-eye-open-blue')
+this.eyeClosedBlue = this.createLayer('character-eye-closed-blue')
 
     this.body.src = CHARACTER_ASSETS.body.body
     this.head.src = CHARACTER_ASSETS.head.head
     this.eyeOpen.src = CHARACTER_ASSETS.eye.openEye
     this.eyeClosed.src = CHARACTER_ASSETS.eye.closedEye
     this.chest.src = CHARACTER_ASSETS.chest.glow
+    this.bodyBlue.src = CHARACTER_ASSETS.body.blue
+this.headBlue.src = CHARACTER_ASSETS.head.blue
+this.eyeOpenBlue.src = CHARACTER_ASSETS.eye.blueOpenEye
+this.eyeClosedBlue.src = CHARACTER_ASSETS.eye.blueClosedEye
 
     this.eyeOpen.style.opacity = '1'
     this.eyeClosed.style.opacity = '0'
+    this.bodyBlue.style.opacity = '0'
+this.headBlue.style.opacity = '0'
+this.eyeOpenBlue.style.opacity = '0'
+this.eyeClosedBlue.style.opacity = '0'
 
     this.container.append(
-      this.body,
-      this.head,
-      this.eyeOpen,
-      this.eyeClosed,
-      this.chest,
-    )
+  this.body,
+  this.bodyBlue,
+  this.head,
+  this.headBlue,
+  this.eyeOpen,
+  this.eyeClosed,
+  this.eyeOpenBlue,
+  this.eyeClosedBlue,
+  this.chest,
+)
 
     this.container.addEventListener('mousedown', () => {
       if (this.state === 'awake') {
@@ -202,243 +222,362 @@ export class CharacterRenderer {
     }, 30000)
   }
 
-  private sleep(): void {
-    if (this.state !== 'awake') {
-      return
-    }
-
-    this.state = 'sleeping'
-
-    if (this.blinkTimer) {
-      clearTimeout(this.blinkTimer)
-    }
-
-    this.breathingAnimation?.cancel()
-    this.chestAnimation?.cancel()
-
-    this.eyeOpen.animate(
-      [
-        { opacity: 1 },
-        { opacity: 0 },
-      ],
-      {
-        duration: 250,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.eyeClosed.animate(
-      [
-        { opacity: 0 },
-        { opacity: 1 },
-      ],
-      {
-        duration: 250,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    setTimeout(() => {
-      if (this.state !== 'sleeping') {
-        return
-      }
-
-      this.sleepingBounce = this.head.animate(
-        [
-          {
-            transform: 'translate(1px, -110px) scale(0.78)',
-          },
-          {
-            transform: 'translate(1px, -107px) scale(0.78)',
-          },
-          {
-            transform: 'translate(1px, -110px) scale(0.78)',
-          },
-        ],
-        {
-          duration: 2800,
-          iterations: Infinity,
-          easing: 'ease-in-out',
-        },
-      )
-
-      this.eyeClosed.animate(
-        [
-          {
-            transform: 'translate(1px, -110px) scale(0.78)',
-          },
-          {
-            transform: 'translate(1px, -107px) scale(0.78)',
-          },
-          {
-            transform: 'translate(1px, -110px) scale(0.78)',
-          },
-        ],
-        {
-          duration: 2800,
-          iterations: Infinity,
-          easing: 'ease-in-out',
-        },
-      )
-    }, 950)
-
-    this.chest.animate(
-      [
-        { opacity: 1 },
-        { opacity: 0 },
-      ],
-      {
-        duration: 70,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.body.animate(
-      [
-        {
-          transform: 'translateY(0px) scale(1)',
-          opacity: 1,
-        },
-        {
-          transform: 'translateY(-70px) scale(0.9)',
-          opacity: 0,
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.head.animate(
-      [
-        {
-          transform: 'translate(1px, -141px) scale(0.69)',
-        },
-        {
-          transform: 'translate(1px, -110px) scale(0.78)',
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.eyeClosed.animate(
-      [
-        {
-          transform: 'translate(1px, -141px) scale(0.69)',
-        },
-        {
-          transform: 'translate(1px, -110px) scale(0.78)',
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
+private sleep(): void {
+  if (this.state !== 'awake') {
+    return
   }
 
-  private wake(): void {
+  this.state = 'sleeping'
+
+  if (this.blinkTimer) {
+    clearTimeout(this.blinkTimer)
+    this.blinkTimer = undefined
+  }
+
+  this.breathingAnimation?.cancel()
+  this.chestAnimation?.cancel()
+
+ this.body.animate(
+  [
+    {
+      transform: 'translateY(0px) scale(1)',
+      opacity: 1,
+    },
+    {
+      transform: 'translateY(-70px) scale(0.9)',
+      opacity: 0,
+    },
+  ],
+  {
+    duration: 900,
+    fill: 'forwards',
+    easing: 'ease-in-out',
+  },
+)
+
+this.bodyBlue.animate(
+  [
+    {
+      transform: 'translateY(0px) scale(1)',
+      opacity: 0,
+    },
+    {
+      transform: 'translateY(-70px) scale(0.9)',
+      opacity: 0,
+    },
+  ],
+  {
+    duration: 900,
+    fill: 'forwards',
+    easing: 'ease-in-out',
+  },
+)
+  this.head.animate(
+    [
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 1,
+      },
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 0,
+      },
+    ],
+    {
+      duration: 900,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.headBlue.animate(
+    [
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 0,
+      },
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeOpen.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 250,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeOpenBlue.animate(
+    [
+      { opacity: 0 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 250,
+      fill: 'forwards',
+    },
+  )
+
+  this.eyeClosed.animate(
+    [
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 0,
+      },
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 0,
+      },
+    ],
+    {
+      duration: 900,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosedBlue.animate(
+    [
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 0,
+      },
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.chest.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 70,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  setTimeout(() => {
     if (this.state !== 'sleeping') {
       return
     }
 
-    this.state = 'waking'
-    this.sleepingBounce?.cancel()
+    this.sleepingBounce = this.headBlue.animate(
+  [
+    {
+      transform: 'translate(1px, -110px) scale(0.78)',
+    },
+    {
+      transform: 'translate(1px, -103px) scale(0.78)',
+    },
+    {
+      transform: 'translate(1px, -110px) scale(0.78)',
+    },
+  ],
+  {
+    duration: 2800,
+    iterations: Infinity,
+    easing: 'ease-in-out',
+  },
+)
 
-    this.blinkTwice()
+this.eyeClosedBlue.animate(
+  [
+    {
+      transform: 'translate(1px, -110px) scale(0.78)',
+    },
+    {
+      transform: 'translate(1px, -103px) scale(0.78)',
+    },
+    {
+      transform: 'translate(1px, -110px) scale(0.78)',
+    },
+  ],
+  {
+    duration: 2800,
+    iterations: Infinity,
+    easing: 'ease-in-out',
+  },
+)
+  }, 950)
+}
 
-    this.body.animate(
-      [
-        {
-          transform: 'translateY(-70px) scale(0.9)',
-          opacity: 0,
-        },
-        {
-          transform: 'translateY(0px) scale(1)',
-          opacity: 1,
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.head.animate(
-      [
-        {
-          transform: 'translate(1px, -110px) scale(0.78)',
-        },
-        {
-          transform: 'translate(1px, -141px) scale(0.69)',
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.eyeClosed.animate(
-      [
-        {
-          transform: 'translate(1px, -110px) scale(0.78)',
-        },
-        {
-          transform: 'translate(1px, -141px) scale(0.69)',
-        },
-      ],
-      {
-        duration: 900,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-    this.chest.animate(
-      [
-        { opacity: 0 },
-        { opacity: 1 },
-      ],
-      {
-        duration: 7000,
-        fill: 'forwards',
-        easing: 'ease-in-out',
-      },
-    )
-
-this.wakeTimer = setTimeout(() => {
-  this.state = 'awake'
-
-  this.eyeClosed.getAnimations().forEach((animation) => {
-    animation.cancel()
-  })
-
-  this.eyeOpen.getAnimations().forEach((animation) => {
-    animation.cancel()
-  })
-
-  this.eyeClosed.style.opacity = '0'
-  this.eyeOpen.style.opacity = '1'
-
-  this.startBreathing()
-  this.startChestPulse()
-  this.startBlinking()
-  this.startSleepTimer()
-}, 950)
+private wake(): void {
+  if (this.state !== 'sleeping') {
+    return
   }
+
+  this.state = 'waking'
+  this.sleepingBounce?.cancel()
+
+  this.headBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.eyeClosedBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.bodyBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.bodyBlue.animate(
+    [
+      {
+        transform: 'translateY(-70px) scale(0.9)',
+        opacity: 0,
+      },
+      {
+        transform: 'translateY(0px) scale(1)',
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 900,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.headBlue.animate(
+    [
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 1,
+      },
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 900,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosedBlue.animate(
+    [
+      {
+        transform: 'translate(1px, -110px) scale(0.78)',
+        opacity: 1,
+      },
+      {
+        transform: 'translate(1px, -141px) scale(0.69)',
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 900,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.chest.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 7000,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  setTimeout(() => {
+    if (this.state !== 'waking') {
+      return
+    }
+
+    this.transitionToRed()
+
+    this.wakeTimer = setTimeout(() => {
+      if (this.state !== 'waking') {
+        return
+      }
+
+      this.state = 'awake'
+
+      this.bodyBlue.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.headBlue.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.eyeClosedBlue.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.eyeOpenBlue.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.body.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.head.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.eyeClosed.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.eyeOpen.getAnimations().forEach((animation) => {
+        animation.cancel()
+      })
+
+      this.bodyBlue.style.opacity = '0'
+      this.headBlue.style.opacity = '0'
+      this.eyeOpenBlue.style.opacity = '0'
+      this.eyeClosedBlue.style.opacity = '0'
+
+      this.body.style.opacity = '1'
+      this.head.style.opacity = '1'
+      this.eyeClosed.style.opacity = '0'
+      this.eyeOpen.style.opacity = '1'
+
+      this.body.style.transform = 'translateY(0px) scale(1)'
+      this.head.style.transform = 'translate(1px, -141px) scale(0.69)'
+      this.eyeOpen.style.transform = 'translate(1px, -141px) scale(0.69)'
+      this.eyeClosed.style.transform = 'translate(1px, -141px) scale(0.69)'
+
+      this.startBreathing()
+      this.startChestPulse()
+      this.startBlinking()
+      this.startSleepTimer()
+    }, 2500)
+  }, 900)
+}
 
   private blinkTwice(): void {
     const firstBlink = () => {
@@ -499,6 +638,196 @@ this.wakeTimer = setTimeout(() => {
       firstBlink()
     }, 300)
   }
+
+  private transitionToBlue(): void {
+  this.body.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.bodyBlue.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.head.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.headBlue.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosed.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosedBlue.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 1200,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+}
+
+private transitionToRed(): void {
+  this.body.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.head.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.eyeOpen.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.eyeClosed.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.bodyBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.headBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.eyeOpenBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.eyeClosedBlue.getAnimations().forEach((animation) => {
+    animation.cancel()
+  })
+
+  this.body.style.transform = 'translateY(0px) scale(1)'
+  this.head.style.transform = 'translate(1px, -141px) scale(0.69)'
+  this.eyeOpen.style.transform = 'translate(1px, -141px) scale(0.69)'
+  this.eyeClosed.style.transform = 'translate(1px, -141px) scale(0.69)'
+
+  this.body.style.opacity = '0'
+  this.head.style.opacity = '0'
+  this.eyeOpen.style.opacity = '0'
+  this.eyeClosed.style.opacity = '0'
+
+  this.bodyBlue.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.body.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.headBlue.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.head.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosedBlue.animate(
+    [
+      { opacity: 1 },
+      { opacity: 0 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+
+  this.eyeClosed.animate(
+    [
+      { opacity: 0 },
+      { opacity: 1 },
+    ],
+    {
+      duration: 2500,
+      fill: 'forwards',
+      easing: 'ease-in-out',
+    },
+  )
+}
 
   private createLayer(className: string): HTMLImageElement {
     const image = document.createElement('img')

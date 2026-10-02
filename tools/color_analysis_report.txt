@@ -1,0 +1,280 @@
+CHARACTER COLOR ANALYSIS REPORT
+================================================================================
+Every pixel was inspected individually.
+The report summarizes the pixel data rather than printing every pixel.
+
+================================================================================
+BODY
+================================================================================
+File: C:\Users\dhaks\Music\chibi-companion\frontend\assets\character_prepared\body\body.png
+Size: 1254 x 1254
+Total pixels: 1,572,516
+Visible pixels: 307,880
+Transparent pixels: 1,264,636
+Partial alpha pixels: 307,446
+Fully opaque pixels: 434
+Unique visible RGBA colors: 46,978
+
+BRIGHTNESS
+--------------------------------------------------------------------------------
+Darkest pixel: 0.00
+Brightest pixel: 255.00
+Average brightness: 22.63
+
+COLOR INFORMATION
+--------------------------------------------------------------------------------
+Colorful pixels: 61,066
+Unique colorful colors: 29,299
+Red-family pixels: 172,970
+Unique red-family colors: 35,862
+Red-family hue range: 0.00° - 359.75°
+
+MOST COMMON RED-FAMILY COLORS
+--------------------------------------------------------------------------------
+RGB( 85,  0,  0) Alpha=  3 H=  0.00° S=100.00% V= 33.33% Pixels=3,915
+RGB(127,  0,  0) Alpha=  2 H=  0.00° S=100.00% V= 49.80% Pixels=2,477
+RGB( 63,  0,  0) Alpha=  4 H=  0.00° S=100.00% V= 24.71% Pixels=901
+RGB( 47, 36, 42) Alpha=253 H=327.27° S= 23.40% V= 18.43% Pixels=737
+RGB( 48, 37, 43) Alpha=253 H=327.27° S= 22.92% V= 18.82% Pixels=690
+RGB( 21, 16, 19) Alpha=253 H=324.00° S= 23.81% V=  8.24% Pixels=675
+RGB( 22, 17, 20) Alpha=253 H=324.00° S= 22.73% V=  8.63% Pixels=643
+RGB( 32, 25, 29) Alpha=253 H=325.71° S= 21.88% V= 12.55% Pixels=643
+RGB( 23, 18, 21) Alpha=253 H=324.00° S= 21.74% V=  9.02% Pixels=642
+RGB( 25, 19, 22) Alpha=253 H=330.00° S= 24.00% V=  9.80% Pixels=589
+RGB( 24, 19, 22) Alpha=253 H=324.00° S= 20.83% V=  9.41% Pixels=575
+RGB( 49, 38, 44) Alpha=253 H=327.27° S= 22.45% V= 19.22% Pixels=572
+RGB( 26, 20, 23) Alpha=253 H=330.00° S= 23.08% V= 10.20% Pixels=550
+RGB( 33, 26, 30) Alpha=253 H=325.71° S= 21.21% V= 12.94% Pixels=540
+RGB( 31, 24, 28) Alpha=253 H=325.71° S= 22.58% V= 12.16% Pixels=515
+RGB( 34, 27, 31) Alpha=253 H=325.71° S= 20.59% V= 13.33% Pixels=506
+RGB( 46, 35, 41) Alpha=253 H=327.27° S= 23.91% V= 18.04% Pixels=504
+RGB( 41, 32, 37) Alpha=253 H=326.67° S= 21.95% V= 16.08% Pixels=491
+RGB( 39, 31, 36) Alpha=253 H=322.50° S= 20.51% V= 15.29% Pixels=489
+RGB( 40, 32, 37) Alpha=253 H=322.50° S= 20.00% V= 15.69% Pixels=482
+
+ALPHA SUMMARY
+--------------------------------------------------------------------------------
+Unique alpha levels: 256
+Minimum alpha: 0
+Maximum alpha: 255
+
+TOP 10 MOST COMMON VISIBLE COLORS
+--------------------------------------------------------------------------------
+RGB(  0,  0,  0) Alpha=  1 Pixels=39,951
+RGB(  0,  0,  0) Alpha=  2 Pixels=13,632
+RGB( 85,  0,  0) Alpha=  3 Pixels=3,915
+RGB(  0,  0,  0) Alpha=253 Pixels=3,621
+RGB(  0,  0,  0) Alpha=  3 Pixels=2,739
+RGB(127,  0,  0) Alpha=  2 Pixels=2,477
+RGB( 63, 63, 63) Alpha=  4 Pixels=1,205
+RGB( 51, 51, 51) Alpha=  5 Pixels=1,067
+RGB( 63,  0,  0) Alpha=  4 Pixels=901
+RGB( 63,  0, 63) Alpha=  4 Pixels=877
+
+================================================================================
+HEAD
+================================================================================
+File: C:\Users\dhaks\Music\chibi-companion\frontend\assets\character_prepared\head\head.png
+Size: 1536 x 1024
+Total pixels: 1,572,864
+Visible pixels: 693,547
+Transparent pixels: 879,317
+Partial alpha pixels: 693,547
+Fully opaque pixels: 0
+Unique visible RGBA colors: 44,308
+
+BRIGHTNESS
+--------------------------------------------------------------------------------
+Darkest pixel: 0.00
+Brightest pixel: 204.78
+Average brightness: 28.38
+
+COLOR INFORMATION
+--------------------------------------------------------------------------------
+Colorful pixels: 114,569
+Unique colorful colors: 25,271
+Red-family pixels: 386,790
+Unique red-family colors: 28,582
+Red-family hue range: 0.00° - 359.32°
+
+MOST COMMON RED-FAMILY COLORS
+--------------------------------------------------------------------------------
+RGB( 54, 41, 48) Alpha=252 H=327.69° S= 24.07% V= 21.18% Pixels=2,056
+RGB( 27, 19, 24) Alpha=253 H=322.50° S= 29.63% V= 10.59% Pixels=2,007
+RGB( 55, 42, 49) Alpha=252 H=327.69° S= 23.64% V= 21.57% Pixels=1,986
+RGB( 27, 20, 25) Alpha=253 H=317.14° S= 25.93% V= 10.59% Pixels=1,923
+RGB( 53, 40, 47) Alpha=253 H=327.69° S= 24.53% V= 20.78% Pixels=1,856
+RGB( 21, 16, 20) Alpha=253 H=312.00° S= 23.81% V=  8.24% Pixels=1,800
+RGB( 55, 42, 49) Alpha=253 H=327.69° S= 23.64% V= 21.57% Pixels=1,694
+RGB( 54, 41, 48) Alpha=253 H=327.69° S= 24.07% V= 21.18% Pixels=1,647
+RGB( 21, 16, 20) Alpha=252 H=312.00° S= 23.81% V=  8.24% Pixels=1,612
+RGB( 56, 43, 50) Alpha=253 H=327.69° S= 23.21% V= 21.96% Pixels=1,522
+RGB( 28, 20, 25) Alpha=253 H=322.50° S= 28.57% V= 10.98% Pixels=1,512
+RGB( 40, 30, 36) Alpha=253 H=324.00° S= 25.00% V= 15.69% Pixels=1,497
+RGB( 26, 19, 24) Alpha=253 H=317.14° S= 26.92% V= 10.20% Pixels=1,482
+RGB( 41, 31, 37) Alpha=253 H=324.00° S= 24.39% V= 16.08% Pixels=1,460
+RGB( 31, 23, 28) Alpha=252 H=322.50° S= 25.81% V= 12.16% Pixels=1,456
+RGB( 53, 40, 47) Alpha=252 H=327.69° S= 24.53% V= 20.78% Pixels=1,347
+RGB( 21, 15, 19) Alpha=253 H=320.00° S= 28.57% V=  8.24% Pixels=1,334
+RGB( 32, 24, 29) Alpha=252 H=322.50° S= 25.00% V= 12.55% Pixels=1,280
+RGB( 21, 17, 20) Alpha=253 H=315.00° S= 19.05% V=  8.24% Pixels=1,271
+RGB( 41, 31, 37) Alpha=252 H=324.00° S= 24.39% V= 16.08% Pixels=1,268
+
+ALPHA SUMMARY
+--------------------------------------------------------------------------------
+Unique alpha levels: 255
+Minimum alpha: 0
+Maximum alpha: 254
+
+TOP 10 MOST COMMON VISIBLE COLORS
+--------------------------------------------------------------------------------
+RGB( 18, 14, 17) Alpha=252 Pixels=10,278
+RGB( 18, 14, 18) Alpha=252 Pixels=8,026
+RGB( 17, 13, 16) Alpha=252 Pixels=7,982
+RGB( 17, 13, 17) Alpha=252 Pixels=7,511
+RGB(  0,  0,  0) Alpha=253 Pixels=7,474
+RGB( 19, 15, 19) Alpha=252 Pixels=7,134
+RGB( 19, 14, 18) Alpha=252 Pixels=5,994
+RGB( 19, 15, 18) Alpha=252 Pixels=5,686
+RGB( 17, 14, 17) Alpha=252 Pixels=5,227
+RGB( 20, 16, 20) Alpha=252 Pixels=4,785
+
+================================================================================
+OPENED_EYE
+================================================================================
+File: C:\Users\dhaks\Music\chibi-companion\frontend\assets\character_prepared\head\eyes\opened_eye.png
+Size: 1536 x 1024
+Total pixels: 1,572,864
+Visible pixels: 60,866
+Transparent pixels: 1,511,998
+Partial alpha pixels: 43,046
+Fully opaque pixels: 17,820
+Unique visible RGBA colors: 12,256
+
+BRIGHTNESS
+--------------------------------------------------------------------------------
+Darkest pixel: 2.41
+Brightest pixel: 241.32
+Average brightness: 57.77
+
+COLOR INFORMATION
+--------------------------------------------------------------------------------
+Colorful pixels: 53,912
+Unique colorful colors: 11,761
+Red-family pixels: 58,207
+Unique red-family colors: 12,040
+Red-family hue range: 0.00° - 359.76°
+
+MOST COMMON RED-FAMILY COLORS
+--------------------------------------------------------------------------------
+RGB(254, 82, 68) Alpha=255 H=  4.52° S= 73.23% V= 99.61% Pixels=308
+RGB(254, 83, 69) Alpha=255 H=  4.54° S= 72.83% V= 99.61% Pixels=283
+RGB(254, 84, 69) Alpha=255 H=  4.86° S= 72.83% V= 99.61% Pixels=246
+RGB(254, 81, 67) Alpha=255 H=  4.49° S= 73.62% V= 99.61% Pixels=210
+RGB(254, 83, 68) Alpha=255 H=  4.84° S= 73.23% V= 99.61% Pixels=207
+RGB(254, 81, 68) Alpha=255 H=  4.19° S= 73.23% V= 99.61% Pixels=201
+RGB(254, 80, 67) Alpha=255 H=  4.17° S= 73.62% V= 99.61% Pixels=143
+RGB(253, 81, 67) Alpha=255 H=  4.52° S= 73.52% V= 99.22% Pixels=143
+RGB(254, 85, 70) Alpha=255 H=  4.89° S= 72.44% V= 99.61% Pixels=142
+RGB(254, 84, 70) Alpha=255 H=  4.57° S= 72.44% V= 99.61% Pixels=133
+RGB(253, 80, 67) Alpha=255 H=  4.19° S= 73.52% V= 99.22% Pixels=122
+RGB(253, 82, 68) Alpha=255 H=  4.54° S= 73.12% V= 99.22% Pixels=112
+RGB(254, 82, 69) Alpha=255 H=  4.22° S= 72.83% V= 99.61% Pixels=104
+RGB(253, 85, 70) Alpha=255 H=  4.92° S= 72.33% V= 99.22% Pixels=99
+RGB( 42, 15, 17) Alpha=123 H=355.56° S= 64.29% V= 16.47% Pixels=93
+RGB(255, 83, 69) Alpha=255 H=  4.52° S= 72.94% V=100.00% Pixels=92
+RGB( 36, 15, 17) Alpha= 63 H=354.29° S= 58.33% V= 14.12% Pixels=85
+RGB(254,182,156) Alpha=255 H= 15.92° S= 38.58% V= 99.61% Pixels=84
+RGB( 35, 15, 17) Alpha= 53 H=354.00° S= 57.14% V= 13.73% Pixels=84
+RGB(254, 86, 71) Alpha=255 H=  4.92° S= 72.05% V= 99.61% Pixels=83
+
+ALPHA SUMMARY
+--------------------------------------------------------------------------------
+Unique alpha levels: 231
+Minimum alpha: 0
+Maximum alpha: 255
+
+TOP 10 MOST COMMON VISIBLE COLORS
+--------------------------------------------------------------------------------
+RGB(254, 82, 68) Alpha=255 Pixels=308
+RGB(254, 83, 69) Alpha=255 Pixels=283
+RGB(254, 84, 69) Alpha=255 Pixels=246
+RGB(254, 81, 67) Alpha=255 Pixels=210
+RGB(254, 83, 68) Alpha=255 Pixels=207
+RGB(254, 81, 68) Alpha=255 Pixels=201
+RGB(254, 80, 67) Alpha=255 Pixels=143
+RGB(253, 81, 67) Alpha=255 Pixels=143
+RGB(254, 85, 70) Alpha=255 Pixels=142
+RGB(254, 84, 70) Alpha=255 Pixels=133
+
+================================================================================
+CLOSED_EYE
+================================================================================
+File: C:\Users\dhaks\Music\chibi-companion\frontend\assets\character_prepared\head\eyes\closed_eye.png
+Size: 1536 x 1024
+Total pixels: 1,572,864
+Visible pixels: 25,074
+Transparent pixels: 1,547,790
+Partial alpha pixels: 25,074
+Fully opaque pixels: 0
+Unique visible RGBA colors: 11,948
+
+BRIGHTNESS
+--------------------------------------------------------------------------------
+Darkest pixel: 0.00
+Brightest pixel: 169.75
+Average brightness: 32.83
+
+COLOR INFORMATION
+--------------------------------------------------------------------------------
+Colorful pixels: 17,798
+Unique colorful colors: 11,596
+Red-family pixels: 17,624
+Unique red-family colors: 11,572
+Red-family hue range: 0.00° - 359.74°
+
+MOST COMMON RED-FAMILY COLORS
+--------------------------------------------------------------------------------
+RGB( 26,  0,  0) Alpha= 10 H=  0.00° S=100.00% V= 10.20% Pixels=149
+RGB( 23,  0,  0) Alpha= 11 H=  0.00° S=100.00% V=  9.02% Pixels=145
+RGB( 21,  0,  0) Alpha= 12 H=  0.00° S=100.00% V=  8.24% Pixels=130
+RGB( 28,  0,  0) Alpha=  9 H=  0.00° S=100.00% V= 10.98% Pixels=100
+RGB( 32,  0,  0) Alpha= 16 H=  0.00° S=100.00% V= 12.55% Pixels=70
+RGB( 30,  0,  0) Alpha= 17 H=  0.00° S=100.00% V= 11.76% Pixels=69
+RGB( 28,  0,  0) Alpha= 18 H=  0.00° S=100.00% V= 10.98% Pixels=69
+RGB( 27,  0,  0) Alpha= 19 H=  0.00° S=100.00% V= 10.59% Pixels=64
+RGB( 32,  0,  0) Alpha=  8 H=  0.00° S=100.00% V= 12.55% Pixels=61
+RGB( 34,  0,  0) Alpha= 15 H=  0.00° S=100.00% V= 13.33% Pixels=54
+RGB( 26,  0,  0) Alpha= 20 H=  0.00° S=100.00% V= 10.20% Pixels=50
+RGB( 33,  0,  0) Alpha= 23 H=  0.00° S=100.00% V= 12.94% Pixels=48
+RGB( 36,  0,  0) Alpha=  7 H=  0.00° S=100.00% V= 14.12% Pixels=46
+RGB( 24,  0,  0) Alpha= 21 H=  0.00° S=100.00% V=  9.41% Pixels=45
+RGB( 39,  0,  0) Alpha= 13 H=  0.00° S=100.00% V= 15.29% Pixels=45
+RGB( 38,  0,  0) Alpha= 27 H=  0.00° S=100.00% V= 14.90% Pixels=41
+RGB( 32,  0,  0) Alpha= 24 H=  0.00° S=100.00% V= 12.55% Pixels=40
+RGB( 31,  0,  0) Alpha= 25 H=  0.00° S=100.00% V= 12.16% Pixels=38
+RGB(192,129,108) Alpha=254 H= 15.00° S= 43.75% V= 75.29% Pixels=37
+RGB( 35,  0,  0) Alpha= 22 H=  0.00° S=100.00% V= 13.73% Pixels=35
+
+ALPHA SUMMARY
+--------------------------------------------------------------------------------
+Unique alpha levels: 255
+Minimum alpha: 0
+Maximum alpha: 254
+
+TOP 10 MOST COMMON VISIBLE COLORS
+--------------------------------------------------------------------------------
+RGB(  0,  0,  0) Alpha=  1 Pixels=2,120
+RGB(  0,  0,  0) Alpha=  2 Pixels=1,112
+RGB(  0,  0,  0) Alpha=  3 Pixels=721
+RGB(  0,  0,  0) Alpha=  4 Pixels=541
+RGB(  0,  0,  0) Alpha=  5 Pixels=482
+RGB(  0,  0,  0) Alpha=  6 Pixels=367
+RGB(  0,  0,  0) Alpha=  7 Pixels=274
+RGB(  0,  0,  0) Alpha=  8 Pixels=213
+RGB(  0,  0,  0) Alpha=  9 Pixels=171
+RGB( 26,  0,  0) Alpha= 10 Pixels=149
+
+
+================================================================================
+END OF REPORT
