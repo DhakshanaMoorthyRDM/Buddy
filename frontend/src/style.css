@@ -10,14 +10,28 @@ body {
   overflow: hidden;
 }
 
-
-
 #app {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.character-stage {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.character-scale {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 627px;
+  height: 627px;
+  transform: scale(0.21);
+  transform-origin: top left;
 }
 
 .character {
@@ -36,6 +50,7 @@ body {
   user-select: none;
   pointer-events: none;
 }
+
 .character-body {
   z-index: 1;
 }
