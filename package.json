@@ -1,0 +1,19 @@
+{
+  "name": "chibi-companion",
+  "version": "0.1.0",
+  "description": "Buddy - personal desktop companion",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "electron": "electron .",
+    "frontend": "npm --prefix frontend run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DhakshanaMoorthyRDM/Buddy.git"
+  },
+  "author": "DhakshanaMoorthyRDM",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^44.5.1"
+  }
+}
