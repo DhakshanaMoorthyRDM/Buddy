@@ -219,7 +219,7 @@ this.eyeClosedBlue.style.opacity = '0'
 
     this.sleepTimer = setTimeout(() => {
       this.sleep()
-    }, 30000)
+    }, 5000)
   }
 
 private sleep(): void {
